@@ -1,22 +1,17 @@
+#!/usr/bin/python3
 from main import *
-
 
 about = """
 +-------------------------------+
-| SCRIPT : Website Scanner      |
+| SCRIPT : WEBSC                |
 | BY : Aymen Benchiheub         |
-| DATE : 23/04/2017             |
+| DATE : 07/05/2017             |
 |                               |
 |My Facebbok:			|
 |   www.facebook.com/benchiehub |
 +-------------------------------+
 
-===================================================
-= Dedication For : Zinou Elgahri And Isaac Lee <3 =
-===================================================
-
 """
-
 def start(url):
 	time = get_local_time()
 	# Just to Get The Domain Name !
@@ -26,17 +21,21 @@ def start(url):
 	# Start Scaning The Website using Nmap Tool
 	n = nmap("-F",ip)
 	#Scaning The Website using Whois Tool
-	whois = whois(ip)
+	w = whois(domain)
 	# CREATE the folder where we save the files
 	name = domain
 	# write the informations into the file
-	informations = [ip,n,whois]
+	informations = [ip,n,w]
+	name = str(name + time)
+	#Create the dir
+	create_dir(domain)
 	for data in informations:
-		write_file(name + time,data)
+		write_file(name,data)
+	bye()
 
 #Get The Url From The User
 print(about)
-url = input('[+]Please Put The Link Here ==> : ')
+url = input('[+] - Please Put The Link Here => : ')
 #Start !!!
-
-start(url)
+if __name__ == '__main__':
+	start(url)
